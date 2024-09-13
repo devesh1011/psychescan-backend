@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import pickle
 import numpy as np
+import os
 
 # Load the pre-trained models (depression, anxiety, stress)
 with open("models/depression_model.pkl", "rb") as f:
@@ -40,8 +41,8 @@ def predict_psyche(input_data: PsycheScanInput):
     }
 
 
-# Run the server using Uvicorn
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, port=8000)
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
