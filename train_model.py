@@ -7,13 +7,13 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
 import numpy as np
 
-df = pd.read_csv("new_data.csv")
+df = pd.read_csv("data.csv")
 
-X = df.drop(columns=["Depression_Category", "Anxiety_Category", "Stress_Category"])
+X = df.drop(columns=["Depression_Category_Encoded", "Anxiety_Category_Encoded", "Stress_Category_Encoded"])
 
-y_depression = df["Depression_Category"]
-y_anxiety = df["Anxiety_Category"]
-y_stress = df["Stress_Category"]
+y_depression = df["Depression_Category_Encoded"]
+y_anxiety = df["Anxiety_Category_Encoded"]
+y_stress = df["Stress_Category_Encoded"]
 
 X_train, X_test, y_train_depression, y_test_depression = train_test_split(
     X, y_depression, test_size=0.2, random_state=42
@@ -127,7 +127,7 @@ def plot_feature_importance(model, title):
     plt.show()
 
 
-# Plot feature importances
-plot_feature_importance(rf_depression, "Depression")
-plot_feature_importance(rf_anxiety, "Anxiety")
-plot_feature_importance(rf_stress, "Stress")
+# # Plot feature importances
+# plot_feature_importance(rf_depression, "Depression")
+# plot_feature_importance(rf_anxiety, "Anxiety")
+# plot_feature_importance(rf_stress, "Stress")
