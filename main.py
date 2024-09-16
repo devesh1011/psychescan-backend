@@ -3,6 +3,12 @@ from pydantic import BaseModel
 import pickle
 import numpy as np
 import os
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://localhost:3000",  # React frontend running locally
+    "https://your-frontend-domain.com",  # If you deploy your frontend
+]
 
 # Load the pre-trained models (depression, anxiety, stress)
 with open("models/depression_model.pkl", "rb") as f:
@@ -15,6 +21,14 @@ with open("models/stress_model.pkl", "rb") as f:
     stress_model = pickle.load(f)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows your frontend to communicate with backend
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (POST, GET, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 
 # Define the input data structure
