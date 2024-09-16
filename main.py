@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     "http://localhost:3000",  # React frontend running locally
-    "https://your-frontend-domain.com",  # If you deploy your frontend
+    "https://psyche-scan.vercel.app/",  # If you deploy your frontend
 ]
 
 # Load the pre-trained models (depression, anxiety, stress)
